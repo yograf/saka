@@ -7,6 +7,7 @@ import {
   getAllSuggestions as getAllClosedTabs,
   recentlyClosedTabSuggestions
 } from './closedTab.js';
+import y from './searchEngine.js';
 import { allHistorySuggestions as getAllHistoryTabs } from './history.js';
 
 function compareRecentlyViewedSuggestions(suggestion1, suggestion2) {
@@ -45,11 +46,16 @@ async function filteredRecentlyViewedSuggestions(searchString) {
   const tabs = await allTabSuggestions();
   const closedTabs = await getAllClosedTabs(searchString);
   const historyTabs = await getAllHistoryTabs(searchString);
-
+  let d = [];
+  if (searchString.length > 4) {
+d = await y(searchString);
+  }
+ 
   return [
     ...tabs,
     ...Object.values(closedTabs),
-    ...Object.values(historyTabs)
+    ...Object.values(historyTabs),
+    ...Object.values(d)
   ].map(tab => ({ ...tab, originalType: tab.type, type: 'recentlyViewed' }));
 }
 

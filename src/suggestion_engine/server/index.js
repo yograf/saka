@@ -19,6 +19,9 @@ export async function activateSuggestion(suggestion) {
     case 'history':
       await browser.tabs.create({ url: suggestion.url });
       break;
+      case 'searchEngine':
+      await browser.tabs.create({ url: suggestion.url });
+      break;
     case 'recentlyViewed':
       await activateSuggestion({
         ...suggestion,

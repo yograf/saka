@@ -15,6 +15,7 @@ module.exports = function webpackConfig(env) {
   const [mode, platform, benchmark] = env.split(':');
 
   const config = {
+    mode,
     resolve: {
       alias: {
         react: 'preact-compat',
